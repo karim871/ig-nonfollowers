@@ -30,13 +30,19 @@ def parse_export(data: dict | list) -> list[dict]:
     result = []
     for item in items:
         for entry in item.get("string_list_data", []):
-            username = entry.get("value", "").strip()
+            # followers_*.json puts username in entry["value"];
+            # following.json omits "value" and puts it in the parent item["title"]
+            username = (entry.get("value") or item.get("title") or "").strip()
             if not username:
                 continue
             ts = entry.get("timestamp", 0)
+            href = entry.get("href", "")
+            # Instagram's following export uses /_u/ redirect URLs — normalise to clean profile URL
+            if "/_u/" in href:
+                href = f"https://www.instagram.com/{username}/"
             result.append({
                 "username": username,
-                "url": entry.get("href") or f"https://www.instagram.com/{username}/",
+                "url": href or f"https://www.instagram.com/{username}/",
                 "date": datetime.fromtimestamp(ts).strftime("%b %d, %Y") if ts else "—",
             })
     return result
