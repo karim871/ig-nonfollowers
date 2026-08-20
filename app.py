@@ -117,10 +117,11 @@ followers_files = col_a.file_uploader(
     help="Upload all followers_*.json files from your Instagram data export.",
 )
 
-following_file = col_b.file_uploader(
-    "Following  (`following.json`)",
+following_files = col_b.file_uploader(
+    "Following  (`following.json`, or `following_1.json`, `following_2.json`, ...)",
     type="json",
-    accept_multiple_files=False,
+    accept_multiple_files=True,
+    help="Upload following.json — or all following_1.json, following_2.json, ... if Instagram split it.",
 )
 
 with st.expander("How to export your Instagram data"):
@@ -134,7 +135,7 @@ with st.expander("How to export your Instagram data"):
    - `following.json`
     """)
 
-if not (followers_files and following_file):
+if not (followers_files and following_files):
     st.info("Upload your followers and following files above to get started.", icon="📂")
     st.stop()
 
@@ -146,7 +147,9 @@ try:
     for f in followers_files:
         followers.extend(parse_export(json.load(f)))
 
-    following = parse_export(json.load(following_file))
+    following: list[dict] = []
+    for f in following_files:
+        following.extend(parse_export(json.load(f)))
 
 except Exception as exc:
     st.error("Could not read those files — make sure they're from Instagram's JSON export.")
