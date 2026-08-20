@@ -3,7 +3,11 @@
 Instagram shows you your follower count. It doesn't show you who's not in it.
 This does.
 
-No login. No password. Your data never leaves your machine — you feed it a file Instagram already lets you export, and it tells you the truth.
+No login. No password. You feed it a file Instagram already lets you export, and it tells you the truth.
+
+**Try it live: [ig-nonfollowers-xr7zrhmmasjcekrkkmd8ny.streamlit.app](https://ig-nonfollowers-xr7zrhmmasjcekrkkmd8ny.streamlit.app/)**
+
+Uploaded files are processed in memory for your session only and never written to disk — nothing is stored or logged. If you'd rather not send your export to a hosted app at all, run it locally instead (below) and it never leaves your machine.
 
 ---
 
@@ -15,7 +19,7 @@ That's it.
 
 ---
 
-## Run it
+## Run it locally
 
 ```bash
 pip install streamlit pandas

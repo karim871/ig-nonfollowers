@@ -191,4 +191,4 @@ render_table(not_following_back, tab1, "not_following_back",  "You followed on")
 render_table(you_dont_follow,    tab2, "you_dont_follow_back", "They followed on")
 
 st.divider()
-st.caption("No data is stored or transmitted. Everything runs in your browser.")
+st.caption("Your files are processed in memory for this session only and never saved to disk — not stored, not logged, not shared.")
