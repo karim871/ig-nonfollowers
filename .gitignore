@@ -7,3 +7,5 @@ venv/
 *.egg-info/
 dist/
 .streamlit/secrets.toml
+.gstack/
+*.log
